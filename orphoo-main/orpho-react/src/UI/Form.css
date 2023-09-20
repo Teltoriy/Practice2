@@ -1,0 +1,172 @@
+
+*
+{
+    --color60: rgb(239, 255, 253);
+    --color30: #ffffff;
+    --color10: #14c1f0;
+}
+body
+{
+    box-sizing: border-box;
+
+    background-color: var(--color60);
+    font-size: 36px;
+    font-family: "Roboto", sans-serif;
+}
+.Reg
+{
+    width: 600px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+.Reg-form
+{
+    display: block;
+    height: 500px;
+    box-shadow: 1.5px 1.5px 5px var(--color10);
+    background-color: var(--color30);
+    position: relative;
+}
+.title
+{
+    margin: 20px auto;
+    width: fit-content;
+    color: var(--color10);
+    font-weight: 900;
+}
+.input-container
+{
+
+    width: 400px;
+    height: 320px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.reg-input
+{
+    padding: 0 6px;
+    font-size: 32px;
+    font-family: inherit;
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid var(--color10);
+    border-radius: 10px;
+    z-index: 10;
+    background-color: var(--color30);
+}
+.reg-input:focus
+{
+    box-shadow: 0 2px 2px var(--color10);
+}
+label
+{
+    display: block;
+    width: fit-content;
+    font-size: 20px;
+    font-weight:400;
+    overflow:visible;
+    margin-bottom: -4px;
+    color: #00000069
+}
+.Reg-form input.submit
+{
+    position: absolute;
+    outline: none;
+    border: none;
+    background-color: var(--color30);
+    right: 0;
+    bottom: 0;
+    margin: 0 40px 40px 0;
+    color:var(--color10);
+    font-weight: 900;
+    font-family: inherit;
+    font-size: 24px;
+    cursor: pointer;
+    width: 5em;
+    height: 2em;
+    box-shadow: 2px 2px 4px var(--color10);
+   
+   
+}
+.Reg-form input.submit:focus
+{
+    box-shadow: 0.5px 0.5px 2px var(--color10);
+}
+footer
+{
+    position: relative;
+    display: block;
+    font-size: 20px;
+    margin: 1em auto 0;
+   
+    color: #00000065;  
+} 
+footer a
+{
+    text-decoration: none;
+    color: var(--color10);
+
+}
+@media screen and (max-width: 1000px) {
+    .Reg
+    {
+        width: 100%;
+        justify-content: space-around;
+        display: block;
+    }
+    .Reg-form
+    {
+        height: fit-content;
+        padding: 1px 0;
+        margin-top: 100px;
+    }
+    .title
+    {
+        font-size: 30px;
+        font-weight: 500;
+        margin: 20px auto;
+    }
+
+    .input-container
+    {
+        width: 86%;
+        margin: 0 7%;
+        height: 160px;
+        justify-content: space-between;
+    }
+    .Reg-form input.submit
+    {
+        position: relative;
+        display: block;
+        margin: 20px auto;
+    }
+    footer
+    {
+        display: block;
+        width: 90%;
+        text-align: center;
+        margin: 1em auto;
+        font-size: 18px;
+    }
+    footer a
+    {
+        font-size: 18px;
+        font-weight: 600;
+    }
+    label
+    {
+        font-size: 18px;
+    }
+    input.reg-input
+    {
+        font-size: 22px;
+    }
+}

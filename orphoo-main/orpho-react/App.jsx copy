@@ -1,0 +1,203 @@
+
+import './styles/App.css'
+import {useNavigate} from 'react-router-dom'
+import {useEffect} from 'react'
+import imageCompression from 'browser-image-compression'
+function App() {
+  const navigate = useNavigate()
+  const key = getCookie('key')
+  useEffect( () => {
+    Fetch(navigate, key)
+  });
+  return (
+    <div className="App">
+      <div className="chat">
+            <div className="view">
+            </div>
+            <form className="send">
+              <input id="msg-file" type= "file" accept='image/*'></input>
+              <label for = "msg-file"></label> 
+              <input type="text" className ="msg-field"></input>
+              <input type="submit" className ="msg-submit" value={''}></input>
+            </form>
+        </div>
+    </div>
+  );
+}
+export default App;
+function getCookie(name) 
+{
+  let matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+async function Fetch(navigate, key)
+{
+  if (!key) navigate('/log')
+    else 
+    {
+      let response = await (fetch('/fetch', {
+        method : 'POST',
+        body: JSON.stringify({key}),
+        headers : 
+        {
+            'Content-Type' : 'application/json'
+        }}))
+      const body = (await response.json())
+      if (body.ok && body.nickname) 
+      {
+        window.nickname = body.nickname
+        Chat()
+      }
+      else
+      {
+          navigate('/log')
+      }
+    }
+}
+const wsHandlers = 
+{
+    
+    pong(data)
+    {
+      
+        if (data == 'pong')
+        {
+          const pingDelay = Date.now() - window.pingTime
+          console.log('ping ' + pingDelay +'ms')
+        }
+    },
+    fetchMessage(data)
+    {
+        let parsedData;
+        try
+        {
+          parsedData = JSON.parse(data)
+        }
+        catch(err)
+        {
+          return
+        }
+        
+        const {content, author, createDate, image} = parsedData
+        let Imagecontent
+        if (image)
+        {
+          let key;
+          let imageList = [] 
+          for (key in image)
+          {
+            imageList.push(image[key])
+          }
+           Imagecontent = new Uint8Array(imageList)
+        }
+        if (!((content || image) && author && createDate)) return;
+        const authorDOM = document.createElement('div')
+              authorDOM.className = 'author'
+        const contentDOM = document.createElement('div')
+              contentDOM.className = 'data'
+        const messageDOM = document.createElement('div')
+              messageDOM.className = 'message'
+        contentDOM.textContent = content
+        authorDOM.textContent = author || 'Анонимус'
+        messageDOM.append(authorDOM)
+        messageDOM.append(contentDOM)
+        if (Imagecontent)
+        {
+          const ImageDOM = document.createElement('img')
+          ImageDOM.className = 'image'
+          ImageDOM.src = URL.createObjectURL(
+            new Blob([Imagecontent.buffer]))
+          messageDOM.append(ImageDOM)
+        }
+        
+        document.querySelector('.view').prepend(messageDOM)
+    } 
+}
+function createSocket()
+{
+  return new WebSocket(window.location.origin.replace(/^http/, 'ws'))
+}
+async function Send(message)
+{
+  await window.socket.send(JSON.stringify(message))
+}
+function Chat()
+{ 
+  /* начало */ 
+  window.socket = createSocket()
+  function ping()
+  {
+    window.socket.send('ping')
+    window.pingTime = Date.now()
+  }
+  setInterval(() => {
+    ping()
+    if (window.socket.readyState > 1)
+    {
+      window.socket = createSocket()
+    }
+  }, 10000);
+  window.socket.onmessage = (event) =>
+  {
+    let key;
+    for (key in wsHandlers)
+    {
+        (wsHandlers[key])(event.data, event)
+    }
+  }
+  
+  [...document.getElementsByClassName('send')].forEach(send => 
+      {
+        send.addEventListener('submit', (event) =>
+          {
+            event.preventDefault()
+            submit(event.target).then(() =>
+            {
+              send.reset()
+            })
+          })
+      })
+  async function submit(target)
+  {
+      const send = target.closest('.send')
+      const field = send.querySelector('.msg-field')
+      const image = send.querySelector('#msg-file').files[0]
+      let loadImage;
+      if (image)
+      {
+        const reader = new FileReader()
+        const options = 
+        {
+          maxSizeMB: 0.3,
+          maxWidthOrHeight: 700,
+          useWebWorker: true
+        }
+        const compressedImage = await imageCompression(image, options)
+        reader.readAsArrayBuffer(compressedImage)
+        loadImage = new Promise(async function(resolve, reject) 
+        {
+          if (!image)
+            reject('no image')
+          setTimeout(() =>
+          {
+            reject('timeout')
+          }, 10000)
+          reader.onload = ev =>
+          {
+            resolve(reader.result)
+          }
+        })
+        loadImage.catch(err =>
+          {
+            alert('Непредвиденная ошибка. Текст ошибки: ' + err)
+          })
+      }
+      const message = 
+      {
+        content : field.value,
+        key : getCookie('key'),
+        image : loadimage ? JSON.stringify(new Uint8Array(await loadImage)) : undefined
+      }
+      await Send(message)
+  }
+}
