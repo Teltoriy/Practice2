@@ -6,3 +6,8 @@ git branch back - создание ветки back
 
 git checkout back - переход на ветку back
 
+git add * - добавление всех файлов в коммит
+
+git commit -m <some message> - создание коммита
+
+git push origin back - пуш всех коммитов на удаленный репозиторий
