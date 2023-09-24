@@ -1,0 +1,8 @@
+git clone -b master https://github.com/Teltoriy/Practice2  - клонирование ветки master на локалку
+
+git status - проевка клонированного репозитория
+
+git branch back - создание ветки back
+
+git checkout back - переход на ветку back
+
