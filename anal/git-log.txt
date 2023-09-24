@@ -1,0 +1,5 @@
+git clone https://github.com/Teltoriy/Practice2
+
+cd Prac*
+
+git branch -m "anal"
