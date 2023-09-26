@@ -1,5 +1,22 @@
+***24.09.2023***
 git clone https://github.com/Teltoriy/Practice2
 
 cd Prac*
 
 git branch -m "anal"
+git add .
+git commit -m "init and added git-log.txt & System.png"
+[anal 1975cec] init and added git-log.txt & System.png
+ 2 files changed, 5 insertions(+)
+ create mode 100644 anal/System.png
+ create mode 100644 anal/git-log.txt
+
+git push origin anal
+Enumerating objects: 6, done.
+Counting objects: 100% (6/6), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 8.57 KiB | 8.57 MiB/s, done.
+Total 5 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/Teltoriy/Practice2
+   2fd3ac8..1975cec  anal -> anal
