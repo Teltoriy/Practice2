@@ -35,7 +35,7 @@ body
 {
     margin: 20px auto;
     width: fit-content;
-    color: var(--color10);
+    color: #0022df;
     font-weight: 900;
 }
 .input-container
