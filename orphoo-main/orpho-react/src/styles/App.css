@@ -117,7 +117,7 @@ body
 {
     display: block;
     width: 55px;
-    background: url('../../public/images/icon/send-button.png');
+    background: url('../../public/images/icon/send-button.svg');
     padding: 0;
     background-repeat: no-repeat;
     background-size: contain;
@@ -210,13 +210,13 @@ body
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    background-image: url(/public/images/icon/upload.png);
+    background-image: url(/public/images/icon/upload.svg);
     cursor: pointer;
     border-radius: 100%;
 }
 .chat label[for = "msg-file"].active
 {
-    background-image: url(/public/images/icon/cancel.png);
+    background-image: url(/public/images/icon/cancel.svg);
     box-shadow: 0 0 4px var(--color10), 0 0 10px var(--color10);
 
 }
