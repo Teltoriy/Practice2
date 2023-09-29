@@ -18,6 +18,9 @@ const db =
     getByNick(nickname)
     {
         return client.query('select * from users where nickname = $1::text', [nickname])
+    },
+    insertMessage() {
+
     }
 }
 module.exports = db

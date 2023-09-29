@@ -16,6 +16,7 @@ let sockets = new Set()
 
 wsServer.on('connection', (socket) =>
 {
+
     sockets.add(socket)
     socket.on('message', (data) => onMessage(data, socket, {sockets, users}))
     socket.on('error', (err) =>
