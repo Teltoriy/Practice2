@@ -65,11 +65,12 @@ body
     display: flex;
     flex-direction: column-reverse;
     flex-grow: 19;
-    background-image: linear-gradient(180deg, var(--color10) -200%, var(--color60) );
+    background-image: linear-gradient(180deg, var(--color10) -180%, var(--color60) );
     margin: 0px;
     
-    border-radius: 0 0 15px 15px;
+    border-radius: 15px 15px 15px 15px;
     margin-bottom: 12%;
+    margin-top: 1%;
     overflow-y: auto;
     padding: 20px 0;
 }
