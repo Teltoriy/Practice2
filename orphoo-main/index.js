@@ -6,7 +6,6 @@ app.use(/*process.env.PORT ? express.static('./build') : */express.static('./bui
 const http = require('http')
 const server = http.createServer(app)
 const wsServer = new Server({server, maxPayload: 8*1024*1024})
-const Message = require('./Message')
 const bodyParser = require('body-parser')
 const formidable = require('express-formidable')
 const {v4} = require('uuid')

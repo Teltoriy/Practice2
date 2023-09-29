@@ -10,4 +10,6 @@ git add * - добавление всех файлов в коммит
 
 git commit -m <some message> - создание коммита
 
+git commit -a -m <some message> - добавление файлов и создание коммита
+
 git push origin back - пуш всех коммитов на удаленный репозиторий

@@ -31,6 +31,7 @@ const handlers =
         const nickname = users[key]
         for (let skt of sockets)
         {
+            
             if (skt === socket) 
             {
                 skt.send(JSON.stringify({author : nickname, content, createDate : Date.now(), image, client : true, messageKey}))
