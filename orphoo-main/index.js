@@ -32,7 +32,7 @@ app.post('/register', bodyParser.json(), async (req, res) =>
     const nickname = req.body.nickname
     const password = req.body.password
     if (!nickname || !password) return;
-    if (checkDigitsLetters8_24(nickname) && checkDigitsLetters8_24(password) && !((await db.getByNick(nickname)).rowCount))
+    if (checkDigitsLetters3_24(nickname) && checkDigitsLetters8_24(password) && !((await db.getByNick(nickname)).rowCount))
         {
             await db.inputUser({nickname, password})
             res.json({ok : true, key : createUniqueKey(nickname)})
@@ -46,7 +46,7 @@ app.post('/login', bodyParser.json(), async(req, res) =>
     const nickname = req.body.nickname
     const password = req.body.password
     if (!nickname || !password) return;
-    if (checkDigitsLetters8_24(nickname) && checkDigitsLetters8_24(password))
+    if (checkDigitsLetters3_24(nickname) && checkDigitsLetters8_24(password))
     {
         
         if ((await db.getByNick(nickname)).rowCount)
@@ -85,6 +85,11 @@ server.listen(process.env.PORT || 5000)
 function checkDigitsLetters8_24(string)
 {
     test = /^[A-Za-zА-Яа-я0-9]{8,24}$/
+    return string.match(test)
+}
+function checkDigitsLetters3_24(string)
+{
+    test = /^[A-Za-zА-Яа-я0-9]{3,24}$/
     return string.match(test)
 }
 
