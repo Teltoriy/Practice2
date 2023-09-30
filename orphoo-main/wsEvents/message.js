@@ -37,7 +37,7 @@ const handlers =
 
         const user = (await db.getByNick(nickname)).rows[0]
         if (content !== "")
-            db.insertMessage(content, user.id)
+            db.insertMessage(content, user.id, Date.now().toString())
 
         for (let skt of sockets)
         {
