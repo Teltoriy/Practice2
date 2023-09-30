@@ -28,3 +28,13 @@ git commit -m "done system.png"
  2 files changed, 18 insertions(+), 1 deletion(-)
 
 git push origin anal
+
+***30.09.2023***
+git add .
+git status
+
+On branch anal
+Your branch is ahead of 'origin/master' by 2 commits.
+
+git commit -m "added analogs.docx"
+git push origin anal
