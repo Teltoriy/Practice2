@@ -19,8 +19,8 @@ const db =
     {
         return client.query('select * from users where nickname = $1::text', [nickname])
     },
-    insertMessage() {
-
-    }
+    insertMessage(content, user_id) {
+        return client.query('insert into messages (content, user_id) values ($1::text, $2::int)', [content, user_id])
+    },
 }
 module.exports = db
