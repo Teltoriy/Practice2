@@ -27,7 +27,7 @@ body
 {
     display: block;
     height: 500px;
-    box-shadow: 1.5px 1.5px 5px var(--color10);
+    box-shadow: 0 0 1px var(--color10);
     background-color: var(--color30);
     position: relative;
 }
@@ -35,7 +35,7 @@ body
 {
     margin: 20px auto;
     width: fit-content;
-    color: var(--color10);
+    color: #0022df;
     font-weight: 900;
 }
 .input-container
