@@ -1,8 +1,6 @@
 const pg = require('pg')
 const client = new pg.Client({
-    ssl: {
-      rejectUnauthorized: false
-    },
+    ssl: false,
     host: "localhost",
     user : "postgres",
     password : "postgres",
